@@ -12,7 +12,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.6.5",
   "dependencies": {
     "@huggingface/transformers": "^3.6.0",
     "@langchain/community": "^0.3.47",
