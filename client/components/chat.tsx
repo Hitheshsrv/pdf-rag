@@ -15,10 +15,14 @@ interface ChatMessage {
   timestamp: Date;
   context?: Array<{
     content: string;
-    metadata: any;
+    metadata: unknown;
   }>;
   model_used?: string;
 }
+
+const isMetadataWithSource = (metadata: unknown): metadata is { source: string } => {
+  return typeof metadata === 'object' && metadata !== null && 'source' in metadata;
+};
 
 const ChatComponent: React.FC = () => {
   const [message, setMessage] = React.useState<string>("");
@@ -192,7 +196,7 @@ const ChatComponent: React.FC = () => {
                               <CardHeader className="pb-2">
                                 <CardTitle className="text-xs font-medium text-yellow-800">
                                   Source {idx + 1}
-                                  {ctx.metadata?.source && (
+                                  {isMetadataWithSource(ctx.metadata) && (
                                     <span className="ml-2 text-yellow-600">
                                       • {ctx.metadata.source}
                                     </span>
